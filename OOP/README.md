@@ -32,3 +32,11 @@ end
 
 cat.extend(AnimalSayer)
 ```
+Or, just continue the Class. So, if you've already declared the Animal class, later, you can:
+```
+class Animal
+    def hello
+        puts "hello"
+    end
+end
+```
