@@ -10,7 +10,7 @@
 rails new rails_frontend
 ```
 
-- You can then cd into `blog/` to see `app/`, `bin/`, `config/`, etc.
+- You can then cd into `blog/` to see `app\`, `bin\`, `config\`, etc.
 
 
 ### Connect to existing DB from Django app
@@ -29,7 +29,7 @@ psql
 
 - Second step is to take that DB name and table name info and put it in the `database.yml` file. See below...
 ```
-# In 'config/database.yml'
+# In 'config\database.yml'
 
 development:
   adapter: postgresql
@@ -42,20 +42,24 @@ development:
 
 ### Create a model in Rails that connects to the grants_grant table
 
-- First, make your model... I tried to use the name "grants_grant" here, but I don't think that helped :(
+- First, make your model...
 ```
-rails generate model grants_grant
+rails generate model Grant
 ```
 - Second, change the table name of the model
 ```
-# in 'app/models/grants_grant.rb'
+# in 'app/models/grant.rb'
 
-class GrantsGrant < ActiveRecord::Base
+class Grant < ActiveRecord::Base
     self.table_name = "grants_grant"
 end
 ```
 
 - **Important to note here:** the "grants_grant" table name is the name of the table that already exists in the Postgres database. It's the tablename I found back in the `Connect to existing DB from Django app` section.
+
+### Now that you've got ur model, try to add it to routes.rb
+
+- 
 
 ### Start landing page
 
