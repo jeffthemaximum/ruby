@@ -57,6 +57,8 @@ end
 
 - **Important to note here:** the "grants_grant" table name is the name of the table that already exists in the Postgres database. It's the tablename I found back in the `Connect to existing DB from Django app` section.
 
+- **Another important note here:** when you run `rails generate model Grant`, Rails automagically creates a migration file. In my case, this file is `db/migrate/20160616161544_create_grants.rb`. If you run `rake db:migrate` at this point, you'll `create_table(:grants)`. In my case, this isn't a problem, because the table I'm connected to is called `grants_grant`. However, this could cause a conflict if you already had a table called `grants` in the db. I'm not sure what Rails would do in the case of this conflict. To avoid this situation, you could just get rid of that migration file, though this may not be Rails best practice. I imagine you could edit that migration file, too.
+
 ### Now that you've got ur model, try to add it to routes.rb
 
 ```
@@ -108,6 +110,15 @@ class GrantsController < ApplicationController
 end
 ```
 
+- This should be enough to send all the grants over to the template.
+
+### Make a template for the `grants#index` controller
+
+- make `index.html.erb` inside `app/views/grants`.
+- sd
+
+### converting `.html.erb` to `.slim`
+- TODO
 ### Start landing page
 
-- `cd` into `rails_frontend`. 
+- TODO
