@@ -40,6 +40,8 @@ development:
   password: airjeff
 ```
 
+- You'll also have to add `gem 'pg'` inside `Gemfile` for this to work.
+
 ### Create a model in Rails that connects to the grants_grant table
 
 - First, make your model...
