@@ -115,7 +115,20 @@ end
 ### Make a template for the `grants#index` controller
 
 - make `index.html.erb` inside `app/views/grants`.
-- sd
+
+```
+# in app/views/grants/index.html.erb
+
+<div class="container">
+    <% @grants.each do |grant| %>
+        <p>
+            <%= grant.data %>
+        </p>
+    <% end %>    
+</div>
+```
+
+- If you head to the browser now and go to `http://localhost:3000/grants`, you should see a big dump of data.
 
 ### converting `.html.erb` to `.slim`
 - TODO
