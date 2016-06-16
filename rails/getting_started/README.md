@@ -10,7 +10,7 @@
 rails new rails_frontend
 ```
 
-- You can then cd into `blog/` to see `app\`, `bin\`, `config\`, etc.
+- You can then cd into `blog/` to see `app/`, `bin/`, `config/`, etc.
 
 
 ### Connect to existing DB from Django app
@@ -29,7 +29,7 @@ psql
 
 - Second step is to take that DB name and table name info and put it in the `database.yml` file. See below...
 ```
-# In 'config\database.yml'
+# In 'config/database.yml'
 
 development:
   adapter: postgresql
