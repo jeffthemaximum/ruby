@@ -59,7 +59,54 @@ end
 
 ### Now that you've got ur model, try to add it to routes.rb
 
-- 
+```
+# within 'app/config/routes.rb add...
+
+resources :grants
+``` 
+
+- now, if you `rake routes` from the terminal, you should see:
+```
+    Prefix Verb   URI Pattern                Controller#Action
+    grants GET    /grants(.:format)          grants#index
+           POST   /grants(.:format)          grants#create
+ new_grant GET    /grants/new(.:format)      grants#new
+edit_grant GET    /grants/:id/edit(.:format) grants#edit
+     grant GET    /grants/:id(.:format)      grants#show
+           PATCH  /grants/:id(.:format)      grants#update
+           PUT    /grants/:id(.:format)      grants#update
+           DELETE /grants/:id(.:format)      grants#destroy
+```
+- However, you won't yet be able to hit any of those routes, cuz you don't habve a controller yet...
+
+### make a controller for grants
+
+- From your terminal:
+```
+rails generate controller grants
+```
+- **Important to notice!!** when you `generate controller`, it's singular. When you `generate model` it's plural. **Question: ** Why?
+
+- Now, if you go to `/grants`, you still won't be able to see a template. This is because you haven't put any logic in your `grants#index` controller, and you haven't made a template in `app/views/grants`
+
+- We'll put in some **basic** controller logic, and then well make the template...
+
+- Basic controller logic:
+- In `app/controllers/grants.rb`...
+- At first, if you haven't changed anything, it should look like this...
+```
+class GrantsController < ApplicationController
+end
+```
+
+- And to add some logic for `index`, we change it to look like this:
+```
+class GrantsController < ApplicationController
+    def index
+        @grants = Grants.all
+    end
+end
+```
 
 ### Start landing page
 
