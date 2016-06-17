@@ -46,6 +46,61 @@
 - Follow this tutorial **How To Install Ruby on Rails with rbenv on Ubuntu 14.04** : https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-with-rbenv-on-ubuntu-14-04
 - Make the following changes
     - On the `rbenv install...` step, it failed for me. Instead, I had to do: `CONFIGURE_OPTS="--disable-install-doc" rbenv install 2.2.3`
-    - 
+- Follow this tutorial **How To Deploy a Rails App with Unicorn and Nginx on Ubuntu 14.04** https://www.digitalocean.com/community/tutorials/how-to-deploy-a-rails-app-with-unicorn-and-nginx-on-ubuntu-14-04
 
-        
+## Running django_backend and rails_frontend on the same DO droplet
+
+- This is possible. I've done it! It's running here:
+- django_backend: http://192.241.132.18:8000/
+- rails_frontend: http://192.241.132.18/grants
+- The key here is to have nginx setup as the reverse proxy to django_backend's gunicorn server and rails_frontend's unicorn server.
+- They way I did this...
+- First, for django_backend, I put a file made a nginx config file according to **How To Set Up Django with Postgres, Nginx, and Gunicorn on Ubuntu 14.04** https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-14-04
+- That nginx file, for me, was /etc/nginx/sites-available/django_backend
+- The contents of the file was:
+```
+server {
+    listen 8000;
+    server_name 192.241.132.18;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/jeff/experiment-grant-scapie-mcscrapeface/django-backend;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/jeff/experiment-grant-scapie-mcscrapeface/django-backend/django_backend.sock;
+    }
+}
+```
+- The only difference between this file and the nginx config file described in the tutorial that I've linked above is the `listen 8000;` line.
+- Importantly, following the directions in the tutorial I linked above, you also need to like this django_backend nginx config file to the nginx sites-enabled with this line `sudo ln -s /etc/nginx/sites-available/myproject /etc/nginx/sites-enabled` ... where `myproject` is the path to django_backend
+- For the rails_frontend, I setup a second nginx config file, and I followed the directions in **How To Deploy a Rails App with Unicorn and Nginx on Ubuntu 14.04** https://www.digitalocean.com/community/tutorials/how-to-deploy-a-rails-app-with-unicorn-and-nginx-on-ubuntu-14-04 
+- My exact rails_frontend nginx config file was at `/etc/nginx/sites-available/default` and the contents of it where:
+```
+upstream app {
+    # Path to Unicorn SOCK file, as defined previously
+    server unix:/home/jeff/experiment-grant-scapie-mcscrapeface/rails_frontend/shared/sockets/unicorn.sock fail_timeout=0;
+}
+
+server {
+    listen 80;
+    server_name localhost;
+
+    root /home/jeff/experiment-grant-scapie-mcscrapeface/rails_frontend/public;
+
+    try_files $uri/index.html $uri @app;
+
+    location @app {
+        proxy_pass http://app;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+    }
+
+    error_page 500 502 503 504 /500.html;
+    client_max_body_size 4G;
+    keepalive_timeout 10;
+}
+```
