@@ -104,3 +104,113 @@ server {
     keepalive_timeout 10;
 }
 ```
+
+## Celery/Redis config
+
+- From a high-level, the gameplan to setup celery / redis as a task queue for the scraper comes from this tutorial: https://realpython.com/blog/python/asynchronous-tasks-with-django-and-celery/
+- The basic idea is that the scraper exists within a Django app called django_backend
+- Right now, the main feature of this app is to run the scraper every hour. Potentially, once I'm confident this hourly schedule is working, I'll cut it down to once every day. 
+- The schedule for the scraping task exists within `django_backend/grants/tasks.py`
+- On the Digitial Ocean droplet, to get it running, follow the plan outlined in the `Running Remotely` section of the tutorial that I linked to above.
+- There's a `django_backend.conf` file that exists in the `/etc/supervisor/conf.d/` directory on the DO server. 
+- It looks like this:
+```
+; the name of your supervisord program
+[program:django_backend]
+
+; Set full path to celery program if using virtualenv
+command=/home/jeff/experiment-grant-scapie-mcscrapeface/django-backend/env/bin/celery worker -A project --loglevel=INFO
+
+; The directory to your Django project
+directory=/home/jeff/experiment-grant-scapie-mcscrapeface/django-backend
+
+; If supervisord is run as the root user, switch users to this UNIX user account
+; before doing any processing.
+user=jeff
+
+; Supervisor will start as many instances of this program as named by numprocs
+numprocs=1
+
+; Put process stdout output in this file
+stdout_logfile=/var/log/celery/django_backend_worker.log
+
+; Put process stderr output in this file
+stderr_logfile=/var/log/celery/django_backend_worker.log
+
+; If true, this program will start automatically when supervisord is started
+autostart=true
+
+; May be one of false, unexpected, or true. If false, the process will never
+; be autorestarted. If unexpected, the process will be restart when the program
+; exits with an exit code that is not one of the exit codes associated with this
+; process’ configuration (see exitcodes). If true, the process will be
+; unconditionally restarted when it exits, without regard to its exit code.
+autorestart=true
+
+; The total number of seconds which the program needs to stay running after
+; a startup to consider the start successful.
+startsecs=10
+
+; Need to wait for currently executing tasks to finish at shutdown.
+; Increase this if you have very long running tasks.
+stopwaitsecs = 600
+
+; When resorting to send SIGKILL to the program to terminate it
+; send SIGKILL to its whole process group instead,
+; taking care of its children as well.
+killasgroup=true
+
+; if your broker is supervised, set its priority higher
+; so it starts first
+priority=998
+```
+
+- and there's a `django_backend_beat.conf` file that exists in the `/etc/supervisor/conf.d/` directory on the DO server. 
+- It looks like this:
+```
+; the name of your supervisord program
+[program:django_backend_beat]
+
+; Set full path to celery program if using virtualenv
+command=/home/jeff/experiment-grant-scapie-mcscrapeface/django-backend/env/bin/celerybeat -A project --loglevel=INFO
+
+; The directory to your Django project
+directory=/home/jeff/experiment-grant-scapie-mcscrapeface/django-backend
+
+; If supervisord is run as the root user, switch users to this UNIX user account
+; before doing any processing.
+user=jeff
+
+; Supervisor will start as many instances of this program as named by numprocs
+numprocs=1
+
+; Put process stdout output in this file
+stdout_logfile=/var/log/celery/django_backend_beat.log
+
+; Put process stderr output in this file
+stderr_logfile=/var/log/celery/django_backend_beat.log
+
+; If true, this program will start automatically when supervisord is started
+autostart=true
+
+; May be one of false, unexpected, or true. If false, the process will never
+; be autorestarted. If unexpected, the process will be restart when the program
+; exits with an exit code that is not one of the exit codes associated with this
+; process’ configuration (see exitcodes). If true, the process will be
+; unconditionally restarted when it exits, without regard to its exit code.
+autorestart=true
+
+; The total number of seconds which the program needs to stay running after
+; a startup to consider the start successful.
+startsecs=10
+
+; if your broker is supervised, set its priority higher
+; so it starts first
+priority=999
+```
+
+- To get these things running on DO, do from the terminal, after following the tutorial:
+```
+sudo supervisorctl start django_backend
+sudo supervisorctl start django_backend_beat
+```
