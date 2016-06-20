@@ -74,6 +74,66 @@ class Grant < ActiveRecord::Base
 end
 ```
 
+# Using pg_search_scope
+
+- Official documentation is here: https://github.com/jmnsf/pg_search#pg_search_scope
+
+- Basic example:
+
+- Just pass an Array if you'd like to search more than one column.
+
+```
+class Person < ActiveRecord::Base
+  include PgSearch
+  pg_search_scope :search_by_full_name, :against => [:first_name, :last_name]
+end
+```
+
+- Now our search query can match either or both of the columns.
+
+```
+person_1 = Person.create!(:first_name => "Grant", :last_name => "Hill")
+person_2 = Person.create!(:first_name => "Hugh", :last_name => "Grant")
+
+Person.search_by_full_name("Grant") # => [person_1, person_2]
+Person.search_by_full_name("Grant Hill") # => [person_1]
+```
+
+- YOU CAN DO THIS WITH JSONB! I'VE DONE IT!!!!
+
+- First, you need to get the newest pg_search gem, and as of this writing, the only version that supports this is `pg_search 1.0.5`
+
+- Add this to your Gemfile
+
+```
+gem 'pg_search', :git => 'https://github.com/jmnsf/pg_search.git'
+```
+
+- Then, in `app/models/grants.rb`
+
+```
+class Grant < ActiveRecord::Base
+    include PgSearch
+    self.table_name = "grants_grant"
+    multisearchable :against => [:search_description, :search_link]
+
+    pg_search_scope :pg_search_description, :against => PgSearch::Configuration::JsonbColumn.new(:data, 'description')
+
+    def search_description
+      data['description']
+    end
+
+    def search_link
+      data['link']
+    end
+end
+```
+
+- A few things to notice here. First, the multisearchable works with methods, so you don't need any fanciness to get the json fields.
+- With `pg_search_scope`, the `:against` option doesn't work with methods. 
+- Instead, we add `PgSearch::Configuration::JsonbColumn.new(:data, 'description')`
+- This searches the `data` column of the `Grant` objects for the `description` key.
+
 # Querying PgSearch
 
 - To get started
