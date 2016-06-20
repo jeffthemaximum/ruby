@@ -1,5 +1,24 @@
 # Setting up multisearch
 
+### Rebuilding the search documents for a given class
+
+- THIS IS SUPER IMPORTANT!!!
+
+- Anytime you change the `:against` option on a given model class, the pg_search_documents table can become out of sync.
+
+- You update it as a rake task by doing...
+
+```
+rake pg_search:multisearch:rebuild[Grant]
+```
+
+- And you can do it from within Ruby codez by doing...
+
+```
+PgSearch::Multisearch.rebuild(Grant)
+```
+
+
 ### install
 
 - In Gemfile
