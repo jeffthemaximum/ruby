@@ -106,6 +106,21 @@ end
 ```
 - And since we've setup `subject { @user }`, we can do `it { should be_valid }`
 
+# Helpful hints
+
+- Use `.dup` to quickly create a duplicate object and test uniqueness
+- Example:
+```
+describe "when email address is already taken" do
+    before do
+      user_with_same_email = @user.dup
+      user_with_same_email.save
+    end
+
+    it { should_not be_valid }
+end
+```
+
 # Running tests
 - Run just one test
 ```

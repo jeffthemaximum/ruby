@@ -1,4 +1,6 @@
-# Validating presence of a field
+# Validations
+
+### Validating prescence of a field
 
 - Set the model like so:
 ```
@@ -6,6 +8,22 @@ class User < ActiveRecord::Base
   validates(:name, presence: true)
 end
 ```
+
+### Validating length
+
+- Get the models like so:
+
+```
+class User < ActiveRecord::Base
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :email, presence: true
+end
+```
+- Here, the `length: { maximum: 50 }` sets the maximum length of a name column on a User object.
+
+### Validating format
+
+- woefn
 
 # Checking error messages
 
