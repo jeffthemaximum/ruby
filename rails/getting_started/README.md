@@ -134,6 +134,22 @@ end
 
 ### converting `.html.erb` to `.slim`
 - TODO
+
 ### Start landing page
 
 - TODO
+
+### Setting up Users
+
+- Using `gem 'annotate', '2.5.0'` allows you to get annotated models like in Experiment
+- Add this to Gemfile
+```
+group :development do
+  gem 'annotate', '2.5.0'
+end
+```
+- Then,
+```
+bundle install
+bundle exec annotate
+```

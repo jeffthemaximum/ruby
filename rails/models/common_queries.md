@@ -1,3 +1,40 @@
+# Users
+
+- find by id
+```
+User.find(1)
+```
+
+- Find by other column
+```
+User.find_by(email: "mhartl@example.com")
+```
+
+- Pop first row
+```
+User.first
+```
+
+- Update multiple attributes
+```
+>> user.update_attributes(name: "The Dude", email: "dude@abides.org")
+=> true
+>> user.name
+=> "The Dude"
+>> user.email
+=> "dude@abides.org"
+```
+
+- Update just one attribute
+```
+>> user.update_attribute(:name, "The Dude")
+=> true
+>> user.name
+=> "The Dude"
+```
+
+# Grants
+
 ## Last Grant
 ```
 g = Grant.last
