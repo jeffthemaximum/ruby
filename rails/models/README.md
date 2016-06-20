@@ -1,3 +1,10 @@
+# FAQ's
+####I already made a model, how do I add a column?
+```
+rails generate migration AddGoodIDToBook good_id:integer
+rake db:migrate
+```
+
 # Generate
 - makes a model and a migration file. 
 - Need to do rake db:migrate afterwards
@@ -12,6 +19,81 @@
 
 - Generate makes a migration file. When you run that migration file with `rake db:migrate` you get a table in the db.
 - You can see that table schema in `db/schema.db`
+
+# Associations
+### How to make a many-to-many?
+#### has_and_belongs_to_many
+- This is the bad way to do things. Makes it harder to create associations.
+- Example:
+```
+# app/model/Bookmark.rb
+class Bookmark < ActiveRecord::Base
+  has_and_belongs_to_many :lists
+end
+
+# app/model/List.rb
+class List < ActiveRecord::Base
+  has_and_belongs_to_many :bookmarks
+end
+```
+- create a new migration 
+```
+rails generate migration CreateJoinTableListBookmark List Bookmark
+```
+- Migrate
+```
+rake db:migrate
+```
+
+#### has_many through
+- This is the better way to do things. It makes it easier to create and query relationships.
+- Example, where we want a programmer to have many clients, and a client to have many programmers.
+- First, create your three tables:
+```
+rails g model Programmer name:string
+rails g model Client name:string
+rails g model Project programmer:references client:references
+rake db:migrate
+```
+- Next, setup your models.rb files
+```
+# app/model/programmer.rb
+class Programmer < ActiveRecord::Base
+  has_many :projects
+  has_many :clients, through: :projects
+end
+
+# app/model/project.rb
+class Projects < ActiveRecord::Base
+  belongs_to :programmer
+  belongs_to :client
+end
+
+# app/model/client.rb
+class Client < ActiveRecord::Base
+  has_many :projects
+  has_many :programmers, through: :projects
+end
+```
+- Then, to create associations:
+```
+programmer = Programmer.create(name: 'Josh Frankel')
+client     = Client.create(name: 'Mr. Nic Cage')
+
+programmer.projects.create(client: client)
+```
+
+- Finally, to query associations
+```
+programmer.clients
+```
+
+# Creating models
+
+#### find_or_create_by and find_or_initialize_by
+- Example:
+- 
+
 
 # Model validations
 - Allow you to ensure that the data you're putting into the db is valid. For example, you can check a email address is valid.
@@ -323,8 +405,3 @@ class Order < ActiveRecord::Base
 end
 ```
 - See more in part 5 here: http://guides.rubyonrails.org/active_record_validations.html#common-validation-options
-
-
-
-
-
