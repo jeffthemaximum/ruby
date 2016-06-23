@@ -119,7 +119,7 @@ scope :funder_by_id, lambda { |funder_id| where('funder_id' => ApplicationContro
 
 - It's essentially equivalent to calling either `Grant.where(:funder_id => 1)` or `Grant.where(:funder_id => [1, 2])`. If you call the later, Rails will do an `OR` query and look for grants where the `funder_id` is either `1` or `2`. 
 
-- The reason I have the ApplicationController.helpers.handle_funder_id_or_ids() method in here is that my value for `funder_id` at this point is either an str like `"`"` or an array where each element is a str, like `["1", "2"]`.  `ApplicationController.helpers.handle_funder_id_or_ids()` takes care of converting either all the str's to int's, which is what Postgres need to execute the query.
+- The reason I have the ApplicationController.helpers.handle_funder_id_or_ids() method in here is that my value for `funder_id` at this point is either an str like `"1"` or an array where each element is a str, like `["1", "2"]`.  `ApplicationController.helpers.handle_funder_id_or_ids()` takes care of converting either all the str's to int's, which is what Postgres need to execute the query.
 
 - ` ApplicationController.helpers.handle_funder_id_or_ids()` looks like this:
 
