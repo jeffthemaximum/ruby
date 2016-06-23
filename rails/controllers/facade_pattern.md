@@ -1,0 +1,1 @@
+- https://robots.thoughtbot.com/sandi-metz-rules-for-developers

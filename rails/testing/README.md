@@ -1,3 +1,8 @@
+# Resources
+
+- https://www.railstutorial.org/book/modeling_users
+- http://rails-3-2.railstutorial.org/book/modeling_users#code-generate_user_model
+
 # Rspec
 - RSpec is a Domain-Specific Language (DSL) for describing the behavior a developer expects to see under given circumstances, and each test sets up the circumstances and declares the expected outcome. If the outcome is different from the expectation, the developer sees an error, signaling them that they need to refactor their code.
 
