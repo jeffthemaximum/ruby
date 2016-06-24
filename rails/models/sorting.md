@@ -103,6 +103,17 @@ private
 - The `icon` is set by the `sort_icon` method, but I'm not includign anything about that here...
 - `sort_column` and `sort_direction` are used to sanitizing the URL parameters.
 
+- I'm pretty proud of the `**kwargs` part here. It allows us to keep track of all the URL parameters that are already being included. 
+- I pass along the `params` to an `other_params()` method. It looks like this:
+
+```
+def other_params(params)
+  params_to_hash(params.slice(:q, :funder_by_id))
+end
+```
+
+- It passes along the `q` and `funder_by_id` parameters as `kwargs` to the `sortable_grants` method as a hash. You can see the whole method here --> https://github.com/jeffthemaximum/experiment-grant-scapie-mcscrapeface/blob/master/rails_frontend/app/helpers/application_helper.rb
+
 ### Controller
 
 - The `index` method in the `grants_controller` ends up looking like this:
