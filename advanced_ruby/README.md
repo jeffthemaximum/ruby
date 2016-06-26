@@ -31,3 +31,15 @@ The convention is to use `{}` with single line lambda and `do...end` with multil
   end
 ```
 `!` converts the value to a boolean, and gives the opposite. So, the purpose of `!!` is to return a boolean value about the presence/absence of a value.
+
+# Assignment
+
+- Crazyness!
+
+```
+>> a = b = 3
+>> a
+=> 3
+>> b
+=> 3
+```

@@ -136,3 +136,47 @@ bundle exec rspec spec/models/user_spec.rb
 ```
 bundle exec rspec spec/
 ```
+
+# Let
+
+- `let` can't happen inside an `it` block. Example:
+
+```
+# This is invalid!!!
+context "return value of authenticate method" 
+  before { user.save }
+  let(:found_user) { User.find_by_email(user.email) }
+  
+  it "should be found with valid password" do
+    expect(user).to eq found_user.authenticate(user.password)
+  end
+
+  it "should not be found with invalid password" do
+    let(:user_for_invalid_password) { found_user.authenticate("invalid") }
+    expect(user).to_not eq user_for_invalid_password
+  end
+end
+```
+
+- And this is valid!
+```
+context "return value of authenticate method" 
+  before { user.save }
+  let(:found_user) { User.find_by_email(user.email) }
+  let(:user_for_invalid_password) { found_user.authenticate("invalid") }
+
+  it "should be found with valid password" do
+    expect(user).to eq found_user.authenticate(user.password)
+  end
+
+  it "should not be found with invalid password" do
+    expect(user).to_not eq user_for_invalid_password
+  end
+end
+```
+
+- RSpec’s let method provides a convenient way to create local variables inside tests. The syntax might look a little strange, but its effect is similar to variable assignment. The argument of let is a symbol, and it takes a block whose return value is assigned to a local variable with the symbol’s name. In other words,
+```
+let(:found_user) { User.find_by_email(@user.email) }
+```
+- creates a found_user variable whose value is equal to the result of find_by_email. We can then use this variable in any of the before or it blocks throughout the rest of the test. One advantage of let is that it memoizes its value, which means that it remembers the value from one invocation to the next. (Note that memoize is a technical term; in particular, it’s not a misspelling of “memorize”.) In the present case, because let memoizes the found_user variable, the find_by_email method will only be called once whenever the User model specs are run.
