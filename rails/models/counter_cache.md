@@ -52,4 +52,4 @@ rake db:migrate
 
 - **Important** This step does not automagically update the value in the `grants_count` table.
 
-- To do that, I made a custom rake task, which you can read about here: 
+- To do that, I made a custom rake task, which you can read about here: https://github.com/jeffthemaximum/ruby/blob/master/rails/rake/custom_tasks.md
