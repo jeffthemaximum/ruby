@@ -92,4 +92,15 @@ heroku config | grep DATABASE_URL
 ```
 heroku run rake db:migrate
 ```
+
+**Update 7/8/2016**
+
+- There's now some custom rake tasks to run, too. You should also run
+
+```
+heroku run rake admin:update_grant_count
+```
+
+- This makes sure the `grant_count` column on the `Funder` model is updated with the count of grants that each funder has.
+
 - Following the tutorials and these tweaks, everything should be up and running!
