@@ -8,4 +8,4 @@
 
 - `Struct`'s are basically simple classes without an `initialize` method or any other methods.
 
-- see `demo.rb` for an example of a BST.
+- see `data_structures.rb` for an example of a BST.

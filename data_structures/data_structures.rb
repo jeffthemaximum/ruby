@@ -25,15 +25,13 @@ module DataStructures
       # if node val is less than tree val
       if node.value < tree.value
         # if there's a value to left of tree, move down and try to insert again
-        return insert_at_node(tree.left, node) unless tree.nil?
+        return insert_at_node(tree.left_node, node) unless tree.left_node.nil?
         # insert node to left of tree node
         return tree.left_node = node
       end
 
       # same things as above, but to the right, if the node.val > tree.val
-      return insert_at_node(tree.right, node) unless tree.nil?
+      return insert_at_node(tree.right_node, node) unless tree.right_node.nil?
       return tree.right_node = node
     end
   end
-
-end
