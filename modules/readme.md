@@ -62,3 +62,38 @@ puts "Dojo::Kata::Roulette::ScopeIn.new.push -
 ```
 
 - This tells us two important things. One, we can nest constant lookups as deep as we want. Second, we aren't restricted to just classes and modules.
+
+# include / included
+
+- module can be included into other classes so that the module's methods are available to instances of that class.
+- In order to include a module into a class, we use the method include which takes one parameter - the name of a Module.
+- basic example
+
+```
+module WarmUp
+  def push_ups
+    "Phew, I need a break!"
+  end
+end
+
+class Gym
+  include WarmUp
+  
+  def preacher_curls
+    "I'm building my biceps."
+  end
+end
+
+class Dojo
+  include WarmUp
+  
+  def tai_kyo_kyu
+    "Look at my stance!"
+  end
+end
+
+puts Gym.new.push_ups
+puts Dojo.new.push_ups
+```
+
+- 
