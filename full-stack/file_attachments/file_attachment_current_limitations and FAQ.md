@@ -9,6 +9,9 @@
 7 - break out the code in `def create` in `app/controllers/updates` that iterates over the file_attachment_ids into it's own method so it's not cluttering the controller
 8 - Add validators to all models in `app/models/files/...`
 9 - Put `has_many :file_attachments` associations in `User` and `Project` models
+10 - Document how to add a `Add Upload` button to other pages, ideally like an upload API
+11 - Add other file types, `PDF` and `CSV`
+12 - Add file upload functionality to `project` pages, not just updates
 
 # FAQ's
 
