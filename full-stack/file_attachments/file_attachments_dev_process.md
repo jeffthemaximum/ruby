@@ -59,6 +59,29 @@ pdfs = FileAttachment.where(type:'Pdf')
 pdfs = Pdf.all
 ```
 
+# Connect FA's wit project or labnote (or potentially other things in future) with polymorphic target
+- I did this migration
+```
+rails generate migration AddTargetToFileAttachments target:references{polymorphic}
+```
+
+- Which generated this file:
+```
+class AddTargetToFileAttachments < ActiveRecord::Migration
+  def change
+    add_reference :file_attachments, :target, polymorphic: true, index: true
+  end
+end
+```
+
+# File upload via js from updates/new with pdf
+
+### tracking down redactor toolbar
+
+- it comes from line 182 in `app/assets/javascripts/components/updates/edit.js.jsx`, which looks like this:
+```
+<div className="redactor-toolbar-wrapper js-redactor-toolbar-wrapper"></div>
+```
 
 # Resources
 - https://samurails.com/tutorial/single-table-inheritance-with-rails-4-part-1/
