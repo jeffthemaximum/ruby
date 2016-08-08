@@ -1,17 +1,17 @@
 # Current Issues
 
-1 - Need to sanatize params in `app/controllers/file_attachment_controller.rb`
-2 - Need to create a `def destroy` controller in `app/controllers/file_attachment_controller.rb`
-3 - Need to display the uploaded file attachments somehow on the frontend in `views/updates/new.html.erb` after a user has uploaded an attachment
-4 - Need to display the uploaded file attachments somehow on the frontend in the template rendered by `def share` in `updates_controller.rb`
-5 - Display button to delete file attachment on `views/updates/new.html.erb`
-6 - Display button to delete file attachment in the template rendered by `def edit` in `updates_controller.rb`
-7 - break out the code in `def create` in `app/controllers/updates` that iterates over the file_attachment_ids into it's own method so it's not cluttering the controller
-8 - Add validators to all models in `app/models/files/...`
-9 - Put `has_many :file_attachments` associations in `User` and `Project` models
-10 - Document how to add a `Add Upload` button to other pages, ideally like an upload API
-11 - Add other file types, `PDF` and `CSV`
-12 - Add file upload functionality to `project` pages, not just updates
+- 1 - Need to sanatize params in `app/controllers/file_attachment_controller.rb`
+- 2 - Need to create a `def destroy` controller in `app/controllers/file_attachment_controller.rb`
+- 3 - Need to display the uploaded file attachments somehow on the frontend in `views/updates/new.html.erb` after a user has uploaded an attachment
+- 4 - Need to display the uploaded file attachments somehow on the frontend in the template rendered by `def share` in `updates_controller.rb`
+- 5 - Display button to delete file attachment on `views/updates/new.html.erb`
+- 6 - Display button to delete file attachment in the template rendered by `def edit` in `updates_controller.rb`
+- 7 - break out the code in `def create` in `app/controllers/updates` that iterates over the file_attachment_ids into it's own method so it's not cluttering the controller
+- 8 - Add validators to all models in `app/models/files/...`
+- 9 - Put `has_many :file_attachments` associations in `User` and `Project` models
+- 10 - Document how to add a `Add Upload` button to other pages, ideally like an upload API
+- 11 - Add other file types, `PDF` and `CSV`
+- 12 - Add file upload functionality to `project` pages, not just updates
 
 # FAQ's
 
