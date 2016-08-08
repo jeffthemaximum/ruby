@@ -1,3 +1,5 @@
+- **Last updated:** August 8, 2016
+
 - This is my attempt to document the flow of a file upload on updates/new.
 - My goal was to create a reusable html button that could basically be plopped on any page.
 
