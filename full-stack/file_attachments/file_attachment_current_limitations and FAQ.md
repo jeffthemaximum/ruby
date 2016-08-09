@@ -1,10 +1,17 @@
 # Current Issues
 
 - 1 - Need to sanatize params in `app/controllers/file_attachment_controller.rb`
+  + http://stackoverflow.com/a/21886874
+  + commit ec371dffb8e2144312f8e5f9683b4d5e54cdbb16
 - 2 - Need to create a `def destroy` controller in `app/controllers/file_attachment_controller.rb`
+  + https://github.com/jeffthemaximum/ruby/blob/master/rails/controllers/def_destroy.md
+  + commit d8630337de499b5d83830aa8d594ff8fea91906e
+  + TODO - still need to check if current user owns attachment
 - 3 - Need to display the uploaded file attachments somehow on the frontend in `views/updates/new.html.erb` after a user has uploaded an attachment
+  + commit 7ab0ce557ac307a13d7ab2711af8d0642e494b28
 - 4 - Need to display the uploaded file attachments somehow on the frontend in the template rendered by `def share` in `updates_controller.rb`
 - 5 - Display button to delete file attachment on `views/updates/new.html.erb`
+  + commit 6358f378bba471c92a6b1c7fc758a12c911dcd0c
 - 6 - Display button to delete file attachment in the template rendered by `def edit` in `updates_controller.rb`
 - 7 - break out the code in `def create` in `app/controllers/updates` that iterates over the file_attachment_ids into it's own method so it's not cluttering the controller
 - 8 - Add validators to all models in `app/models/files/...`
@@ -13,6 +20,7 @@
 - 11 - Add other file types, `PDF` and `CSV`
 - 12 - Add file upload functionality to `project` pages, not just updates
 - 13 - need to check that file attachment belongs to user in `def create` of `updates_controller.rb`
+- 14 - What happens if user uplaods attachments on updates#new then leaves page? should u delete them? should u query for attachments before loading new?
 
 # FAQ's
 
