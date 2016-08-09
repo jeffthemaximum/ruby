@@ -12,6 +12,7 @@
 - 10 - Document how to add a `Add Upload` button to other pages, ideally like an upload API
 - 11 - Add other file types, `PDF` and `CSV`
 - 12 - Add file upload functionality to `project` pages, not just updates
+- 13 - need to check that file attachment belongs to user in `def create` of `updates_controller.rb`
 
 # FAQ's
 
