@@ -22,6 +22,7 @@
   + commit 72de814b6ce44dbefe592d489c577f6e22794bbe
 - 8 - Add validators to all models in `app/models/files/...`
 - 9 - Put `has_many :file_attachments` associations in `User` and `Project` models
+  + commit 8997415927d93e617621e9ec382024e9fb48068b
 - 10 - Document how to add a `Add Upload` button to other pages, ideally like an upload API
 - 11 - Add other file types, `PDF` and `CSV`
 - 12 - Add file upload functionality to `project` pages, not just updates
