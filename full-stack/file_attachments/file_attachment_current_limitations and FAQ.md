@@ -12,6 +12,7 @@
 - 4 - Need to display the uploaded file attachments somehow on the frontend in the template rendered by `def share` in `updates_controller.rb`
 - 5 - Display button to delete file attachment on `views/updates/new.html.erb`
   + commit 6358f378bba471c92a6b1c7fc758a12c911dcd0c
+- 6a - display file attachments on template rendered in the template rendered by `def edit` in `updates_controller.rb`
 - 6 - Display button to delete file attachment in the template rendered by `def edit` in `updates_controller.rb`
 - 7 - break out the code in `def create` in `app/controllers/updates` that iterates over the file_attachment_ids into it's own method so it's not cluttering the controller
 - 8 - Add validators to all models in `app/models/files/...`
@@ -21,6 +22,8 @@
 - 12 - Add file upload functionality to `project` pages, not just updates
 - 13 - need to check that file attachment belongs to user in `def create` of `updates_controller.rb`
 - 14 - What happens if user uplaods attachments on updates#new then leaves page? should u delete them? should u query for attachments before loading new?
+- 15 - handle generic file attachments (not img or pdf)
+- 16 - user can drag/drop file attachment onto text field for upload. doesn't go inline, but does upload
 
 # FAQ's
 
