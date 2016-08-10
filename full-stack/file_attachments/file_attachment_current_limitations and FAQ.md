@@ -25,12 +25,15 @@
   + commit 8997415927d93e617621e9ec382024e9fb48068b
 - 10 - Document how to add a `Add Upload` button to other pages, ideally like an upload API
 - 11 - Add other file types, `PDF` and `CSV`
+  + commit 7612dfd79495059885f470a5b95310d172838677
 - 12 - Add file upload functionality to `project` pages, not just updates
 - 13 - need to check that file attachment belongs to user in `def create` of `updates_controller.rb`
 - 14 - What happens if user uplaods attachments on updates#new then leaves page? should u delete them? should u query for attachments before loading new?
 - 15 - handle generic file attachments (not img or pdf)
 - 16 - user can drag/drop file attachment onto text field for upload. doesn't go inline, but does upload
 - 17 - add styles to file attachments in templates
+- 18 - style filepicker upload modal
+- 19 - limit file upload size. see here: https://www.filestack.com/docs/file-ingestion/javascript-api/pick ... Max size
 
 # FAQ's
 
