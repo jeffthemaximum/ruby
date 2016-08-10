@@ -10,11 +10,16 @@
 - 3 - Need to display the uploaded file attachments somehow on the frontend in `views/updates/new.html.erb` after a user has uploaded an attachment
   + commit 7ab0ce557ac307a13d7ab2711af8d0642e494b28
 - 4 - Need to display the uploaded file attachments somehow on the frontend in the template rendered by `def share` in `updates_controller.rb`
+  + 8b8ded2ad18addf1bcf2fa34a6d02358fb64a7d0
+  + commit 5077ca4eb29a4b1299421bd4d5a4da1997eb4409
 - 5 - Display button to delete file attachment on `views/updates/new.html.erb`
   + commit 6358f378bba471c92a6b1c7fc758a12c911dcd0c
 - 6a - display file attachments on template rendered in the template rendered by `def edit` in `updates_controller.rb`
+  + commit 5077ca4eb29a4b1299421bd4d5a4da1997eb4409
 - 6 - Display button to delete file attachment in the template rendered by `def edit` in `updates_controller.rb`
+  + commit 5077ca4eb29a4b1299421bd4d5a4da1997eb4409
 - 7 - break out the code in `def create` in `app/controllers/updates` that iterates over the file_attachment_ids into it's own method so it's not cluttering the controller
+  + commit 72de814b6ce44dbefe592d489c577f6e22794bbe
 - 8 - Add validators to all models in `app/models/files/...`
 - 9 - Put `has_many :file_attachments` associations in `User` and `Project` models
 - 10 - Document how to add a `Add Upload` button to other pages, ideally like an upload API
@@ -24,6 +29,7 @@
 - 14 - What happens if user uplaods attachments on updates#new then leaves page? should u delete them? should u query for attachments before loading new?
 - 15 - handle generic file attachments (not img or pdf)
 - 16 - user can drag/drop file attachment onto text field for upload. doesn't go inline, but does upload
+- 17 - add styles to file attachments in templates
 
 # FAQ's
 
