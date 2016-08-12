@@ -36,6 +36,8 @@
   + commit 7612dfd79495059885f470a5b95310d172838677
 - 16 - user can drag/drop file attachment onto text field for upload. doesn't go inline, but does upload
 - 17 - add styles to file attachments in templates
+  + several commits, ending with...
+  + commit 8a1bac4d48856e7beb0c06a8d863fb528e4fde0a
 - 18 - style filepicker upload modal
 - 19 - limit file upload size. see here: https://www.filestack.com/docs/file-ingestion/javascript-api/pick ... Max size
 
