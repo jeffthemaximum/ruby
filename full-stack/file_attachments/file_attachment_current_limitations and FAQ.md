@@ -28,6 +28,7 @@
   + commit 7612dfd79495059885f470a5b95310d172838677
 - 12 - Add file upload functionality to `project` pages, not just updates
 - 13 - need to check that file attachment belongs to user in `def create` of `updates_controller.rb`
+    * commit af1d36cc0923634e54d803c9b2f02cc43f69e699
 - 14 - What happens if user uplaods attachments on updates#new then leaves page? should u delete them? should u query for attachments before loading new?
   + delete it
   + https://www.filestack.com/docs/file-ingestion/javascript-api/remove
